@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ARCU&OHM: Förderankäufe des Kunstfonds 2011-2019</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+  <script src="src/sigma.core.js"></script>
+  <script src="src/conrad.js"></script>
+  <script src="src/utils/sigma.utils.js"></script>
+  <script src="src/utils/sigma.polyfills.js"></script>
+  <script src="src/sigma.settings.js"></script>
+  <script src="src/classes/sigma.classes.dispatcher.js"></script>
+  <script src="src/classes/sigma.classes.configurable.js"></script>
+  <script src="src/classes/sigma.classes.graph.js"></script>
+  <script src="src/classes/sigma.classes.camera.js"></script>
+  <script src="src/classes/sigma.classes.quad.js"></script>
+  <script src="src/classes/sigma.classes.edgequad.js"></script>
+  <script src="src/captors/sigma.captors.mouse.js"></script>
+  <script src="src/captors/sigma.captors.touch.js"></script>
+  <script src="src/renderers/sigma.renderers.canvas.js"></script>
+  <script src="src/renderers/sigma.renderers.webgl.js"></script>
+  <script src="src/renderers/sigma.renderers.svg.js"></script>
+  <script src="src/renderers/sigma.renderers.def.js"></script>
+  <script src="src/renderers/webgl/sigma.webgl.nodes.def.js"></script>
+  <script src="src/renderers/webgl/sigma.webgl.nodes.fast.js"></script>
+  <script src="src/renderers/webgl/sigma.webgl.edges.def.js"></script>
+  <script src="src/renderers/webgl/sigma.webgl.edges.fast.js"></script>
+  <script src="src/renderers/webgl/sigma.webgl.edges.arrow.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edgehovers.def.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edgehovers.curve.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edgehovers.arrow.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.edgehovers.curvedArrow.js"></script>
+  <script src="src/renderers/canvas/sigma.canvas.extremities.def.js"></script>
+  <script src="src/renderers/svg/sigma.svg.utils.js"></script>
+  <script src="src/renderers/svg/sigma.svg.nodes.def.js"></script>
+  <script src="src/renderers/svg/sigma.svg.edges.def.js"></script>
+  <script src="src/renderers/svg/sigma.svg.edges.curve.js"></script>
+  <script src="src/renderers/svg/sigma.svg.labels.def.js"></script>
+  <script src="src/renderers/svg/sigma.svg.hovers.def.js"></script>
+  <script src="src/middlewares/sigma.middlewares.rescale.js"></script>
+  <script src="src/middlewares/sigma.middlewares.copy.js"></script>
+  <script src="src/misc/sigma.misc.animation.js"></script>
+  <script src="src/misc/sigma.misc.bindEvents.js"></script>
+  <script src="src/misc/sigma.misc.bindDOMEvents.js"></script>
+  <script src="src/misc/sigma.misc.drawHovers.js"></script>
+
+  <script src="sigma/sigma.parsers.json.js"></script>
+  <script src="sigma/sigma.plugins.filter.js"></script>
+
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="colors.css" type="text/css" media="screen" />
+
+</head>
+
+<body>
+
+<div id="container">
+  <div id="graph-container"></div>
+</div>
+
+<div id="info-page">
+  <div class="cancel-label">
+  <input type="image" src="images/cancel.png" onclick="info_close();">
+  </div>
+<div class="scroller">
+  <div class="info-text">
+  <p><span class="highlight">ARCU&OHM</span> ist ein Kuratoren-Duo bestehend aus dem Künstler <a href="https://tillmannohm.com" target="_blank">Tillmann Ohm</a>
+ und seinem "Artificial Curator" <a href="https://twitter.com/A_R_C_U" target="_blank">ARCU</a>. Basierend auf algorithmischen Verfahren und mit Einsatz von Künstlicher Intelligenz entwickelt diese Mensch-Maschine-Kollaboration neue kuratorische Methoden und Techniken für den Ausstellungsbetrieb.
+  <br><br>
+  Für die Ausstellung <a href="https://www.facebook.com/halle14/" target="_blank">KUNST(RE_PUBLIC)</a> der <a href="http://www.halle14.org/" target="_blank">HALLE 14</a> in Zusammenarbeit mit dem <a href="https://kunstfonds.skd.museum/" target="_blank">Kunstfonds der Staatlichen Kunstsammlungen Dresden</a> entstand eine kuratorische Einordnung sowie algorithmische Auswahl von über 370 Werken der aus den in der Sammlung befindlichen Förderankäufen der <a href="http://www.kdfs.de/" target="_blank">Kulturstiftung des Freistaates Sachsen</a>. Der Freistaat fördert die sächsische Kunstszene unter anderem durch die seit 1992 jährlich stattfindenden Ankäufe von Kunstwerken.
+  <br><br>
+  In dieser interaktiven Karte können Sie sich sowohl durch die einzelnen Förderankäufe (2011-2019) als auch durch die Auswahl von ARCU&OHM klicken und semantische Zusammenhänge entdecken.
+  <br><br></p>
+</div>
+<div>
+<span style="margin-right: 25px;">
+<img src="images/arcu-ohm.png">
+</span>
+<span>
+<img src="images/halle14.png">
+</span>
+<div style="margin-top: 25px;"></div>
+</div>
+<span style="margin-right: 25px;">
+  <img src="images/skd.png">
+</span>
+<span>
+<img src="images/kdfs.png">
+</span>
+</div>
+</div>
+
+
+<div id="menu">
+  <input type="image" src="images/right.png" onclick="menu_open();">
+</div>
+
+<div id="controller">
+  <div class="cancel-menu">
+  <input type="image" src="images/cancel.png" onclick="menu_close();">
+  </div>
+
+  <div class="help-pane">
+    <span>
+    <input type="image" src="images/arcu-ohm.png" onclick="info_open();">
+    </span>
+  </div>
+
+  <div class="arcu-pane">
+  <label id="alles" class="container">Förderankäufe 2011-2019
+    <input id="all" type="radio" checked="checked" name="kuration" onchange="filtering();">
+    <span class="checkmark-radio"></span>
+  </label>
+  <label id="algo" class="container">algorithmische Auswahl
+    <input id="arcu" type="radio" name="kuration" onchange="filtering();">
+    <span class="checkmark-radio"></span>
+  </label>
+  </div>
+
+<div class="control-pane">
+<label id="keys" class="container"><span class="cl">Schlagwörter</span>
+  <input type="checkbox" id="keywords" name="keywords" onchange="filtering();" checked>
+  <span class="checkmark"></span>
+</label>
+
+<label id="arti" class="container"><span class="cl">KünstlerInnen</span>
+  <input type="checkbox" id="artists" name="artists" onchange="filtering();" checked>
+  <span class="checkmark"></span>
+</label>
+
+<label id="artw" class="container"><span class="cl">Kunstwerke</span>
+  <input type="checkbox" id="artworks" name="artworks" onchange="filtering();" checked>
+  <span class="checkmark"></span>
+</label>
+
+</div>
+</div>
+
+<div id="zoom-pane" class="mobile">
+  <span>
+  <input type="image" src="images/zoom_in.png" onclick="zoomIn();">
+  </span>
+  <span class="placer"></span>
+  <span>
+  <input type="image" src="images/zoom_out.png" onclick="zoomOut();">
+  </span>
+</div>
+
+<div id="display" class="label-page" style="display: none">
+    <div class="cancel-label">
+      <input type="image" src="images/cancel.png" onclick="label_close();">
+    </div>
+
+  <div class="scroller">
+    <div class="artwork-img">
+    <img id="artwork" src="">
+    </div>
+    <div id="artwork-details">
+      <span></span>
+      <span id="title"></span>
+      <span id="artist"></span>
+    </div>
+    <div id="other-details">
+      <span id="category"></span>
+      <span id="material"></span>
+      <span id="size"></span>
+      <span id="description"></span>
+    </div>
+    <span><a href="" target="blank" id="skd-link">Zur SKD Online Collection<br><br></a></span>
+    </div>
+</div>
+
+
+<script>
+var filter;
+var camera;
+var _ = {
+  $: function (id) {
+    return document.getElementById(id);
+  },
+
+  all: function (selectors) {
+    return document.querySelectorAll(selectors);
+  },
+
+  removeClass: function(selectors, cssClass) {
+    var nodes = document.querySelectorAll(selectors);
+    var l = nodes.length;
+    for ( i = 0 ; i < l; i++ ) {
+      var el = nodes[i];
+      // Bootstrap compatibility
+      el.className = el.className.replace(cssClass, '');
+    }
+  },
+
+  addClass: function (selectors, cssClass) {
+    var nodes = document.querySelectorAll(selectors);
+    var l = nodes.length;
+    for ( i = 0 ; i < l; i++ ) {
+      var el = nodes[i];
+      // Bootstrap compatibility
+      if (-1 == el.className.indexOf(cssClass)) {
+        el.className += ' ' + cssClass;
+      }
+    }
+  },
+
+  show: function (selectors) {
+    this.removeClass(selectors, 'hidden');
+  },
+
+  hide: function (selectors) {
+    this.addClass(selectors, 'hidden');
+  },
+
+  toggle: function (selectors, cssClass) {
+    var cssClass = cssClass || "hidden";
+    var nodes = document.querySelectorAll(selectors);
+    var l = nodes.length;
+    for ( i = 0 ; i < l; i++ ) {
+      var el = nodes[i];
+      //el.style.display = (el.style.display != 'none' ? 'none' : '' );
+      // Bootstrap compatibility
+      if (-1 !== el.className.indexOf(cssClass)) {
+        el.className = el.className.replace(cssClass, '');
+      } else {
+        el.className += ' ' + cssClass;
+      }
+    }
+  }
+};
+
+function menu_close() {
+    document.getElementById("controller").style.display = "none";
+    document.getElementById("menu").style.display = "block";
+};
+
+function menu_open() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("controller").style.display = "block";
+};
+
+function label_close() {
+    document.getElementById("display").style.display = "none";
+};
+
+function info_close() {
+    document.getElementById("info-page").style.display = "none";
+    if (document.getElementById("controller").style.display !== "none"){
+    document.getElementById("menu").style.display = "none";
+  } else {
+    document.getElementById("menu").style.display = "block";
+  }
+};
+
+function info_open() {
+    document.getElementById("info-page").style.display = "block";
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("display").style.display = "none";
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      document.getElementById("controller").style.display = "none";
+     }
+
+};
+
+sigma.utils.pkg('sigma.canvas.nodes');
+
+sigma.canvas.nodes.image = (function() {
+  var _cache = {},
+      _loading = {},
+      _callbacks = {};
+
+  // Return the renderer itself:
+  var renderer = function(node, context, settings) {
+    var args = arguments,
+        prefix = settings('prefix') || '',
+        size = node[prefix + 'size'],
+        color = node.color || settings('defaultNodeColor'),
+        url = node.url;
+
+    if (_cache[url]) {
+      context.save();
+
+      // Draw the clipping disc:
+      context.beginPath();
+      context.arc(
+        node[prefix + 'x'],
+        node[prefix + 'y'],
+        node[prefix + 'size'],
+        0,
+        Math.PI * 2,
+        true
+      );
+      context.closePath();
+      context.clip();
+
+      // Draw the image
+      context.drawImage(
+        _cache[url],
+        node[prefix + 'x'] - size,
+        node[prefix + 'y'] - size,
+        2 * size,
+        2 * size
+      );
+
+      // Quit the "clipping mode":
+      context.restore();
+
+      // Draw the border:
+      context.beginPath();
+      context.arc(
+        node[prefix + 'x'],
+        node[prefix + 'y'],
+        node[prefix + 'size'],
+        0,
+        Math.PI * 2,
+        true
+      );
+      context.lineWidth = size / 5;
+      context.strokeStyle = node.color || settings('defaultNodeColor');
+      context.stroke();
+    } else {
+      sigma.canvas.nodes.image.cache(url);
+      sigma.canvas.nodes.def.apply(
+        sigma.canvas.nodes,
+        args
+      );
+    }
+  };
+
+  // Let's add a public method to cache images, to make it possible to
+  // preload images before the initial rendering:
+  renderer.cache = function(url, callback) {
+    if (callback)
+      _callbacks[url] = callback;
+
+    if (_loading[url])
+      return;
+
+    var img = new Image();
+
+    img.onload = function() {
+      _loading[url] = false;
+      _cache[url] = img;
+
+      if (_callbacks[url]) {
+        _callbacks[url].call(this, img);
+        delete _callbacks[url];
+      }
+    };
+
+    _loading[url] = true;
+    img.src = url;
+  };
+
+  return renderer;
+})();
+
+function filtering() {
+   filter.undo();
+
+   if (document.getElementById('arcu').checked)
+   {
+     filter
+     .nodesBy(function(n) {
+       return n.attributes["arcu"] == 'true';
+     }, 'node-arcu')
+     .apply();
+
+   } else {
+     filter
+   .undo('node-arcu')
+   .apply()
+   };
+
+   if (document.getElementById('keywords').checked)
+   {
+     filter
+   .undo('node-keys')
+   .apply()
+   } else {
+     filter
+         .nodesBy(function(n) {
+           return n.attributes["type"] !== 'keyword';
+         }, 'node-keys')
+         .apply();
+   };
+   if (document.getElementById('artists').checked)
+   {
+     filter
+   .undo('node-artists')
+   .apply()
+   } else {
+     filter
+         .nodesBy(function(n) {
+           return n.attributes["type"] !== 'artist';
+         }, 'node-artists')
+         .apply();
+   }
+   if (document.getElementById('artworks').checked)
+   {
+     filter
+   .undo('node-artworks')
+   .apply()
+   } else {
+     filter
+         .nodesBy(function(n) {
+           return n.attributes["type"] !== 'artwork';
+         }, 'node-artworks')
+         .apply();
+   }
+   filter
+      .edgesBy(function(e) {
+        return e.attributes["relation"] !== 'sem';
+      }, 'edge-sem')
+      .apply();
+ };
+
+sigma.classes.graph.addMethod('neighbors', function(nodeId) {
+    var k,
+        neighbors = {},
+        index = this.allNeighborsIndex[nodeId] || {};
+
+    for (k in index)
+      neighbors[k] = this.nodesIndex[k];
+    return neighbors;
+  });
+
+function zoomIn(){
+  // Zoom in - animation :
+ sigma.misc.animation.camera(camera, {
+   ratio: camera.ratio / camera.settings('zoomingRatio')
+ }, {
+   duration: 200
+ });
+ };
+
+function zoomOut(){
+   // Zoom out - animation :
+sigma.misc.animation.camera(camera, {
+  ratio: camera.ratio * camera.settings('zoomingRatio')
+}, {
+  duration: 200
+});
+  };
+
+sigma.parsers.json(
+  'data.json',
+  {
+  renderer: {
+    // IMPORTANT:
+    // This works only with the canvas renderer, so the
+    // renderer type set as "canvas" is necessary here.
+    container: document.getElementById('graph-container'),
+    type: 'canvas'
+  },
+  settings: {
+    minEdgeSize: 0.2,
+    maxEdgeSize: 0.2,
+    minNodeSize: 10,
+    maxNodeSize: 12,
+  }
+
+},
+function (s) {
+  filter = sigma.plugins.filter(s);
+  filter
+     .edgesBy(function(e) {
+       return e.attributes["relation"] !== 'sem';
+     }, 'edge-sem')
+     .apply();
+  camera = s.cameras[0];
+  camera.goTo({ x: 0, y: 0, angle: 0, ratio: 0.5 });
+
+  s.bind('clickNode', function(e) {
+    if (!e.data.captor.isDragging) {
+    var node = e.data.node;
+    if (node.attributes["type"] == "artwork") {
+    document.getElementById("info-page").style.display = "none";
+    document.getElementById("display").style.display = "block";
+    document.getElementById("artwork").src = node.attributes["url"];
+    document.getElementById("title").innerHTML = "<br>" + node.label + "<br><br>";
+    document.getElementById("artist").innerHTML = node.attributes["artist"]+ "<br><br>";
+    document.getElementById("category").innerHTML = node.attributes["category"] + ", " + node.attributes["year"] + "<br>";
+    document.getElementById("material").innerHTML = node.attributes["material"]+ "<br>";
+    document.getElementById("size").innerHTML = node.attributes["size"]+ "<br><br>";
+    document.getElementById("description").innerHTML = node.attributes["desciption"]+ "<br><br>";
+    document.getElementById("skd-link").href = node.attributes["link"];
+  }
+  else if (node.attributes["type"] == "keyword") {
+      document.getElementById("display").style.display = "none";
+    }
+
+    var nodeId = node.id,
+      toKeep = s.graph.neighbors(nodeId);
+    toKeep[nodeId] = node;
+    filtering();
+    filter
+     .undo('edge-sem')
+     .apply();
+    s.graph.nodes().forEach(function(n) {
+      if (!toKeep[n.id])
+        n.hidden = true;
+    });
+
+    s.graph.edges().forEach(function(e) {
+      e.hidden = false;
+    });
+    s.refresh();
+  }
+  });
+
+  s.bind("clickStage", function(e) {
+
+     if (!e.data.captor.isDragging) {
+         document.getElementById("display").style.display = "none";
+
+         s.graph.nodes().forEach(function(n) {
+           n.hidden = false;
+         });
+
+         s.graph.edges().forEach(function(e) {
+           e.hidden = false;
+         });
+         filtering();
+         s.refresh();
+       }
+   });
+}
+);
+
+function windowSize(x) {
+  if (x.matches) { // If media query matches
+    document.getElementById("controller").style.display = "none";
+    document.getElementById("zoom-pane").style.display = "none";
+    if (document.getElementById("info-page").style.display !== "none") {
+        document.getElementById("menu").style.display = "none";
+    } else {
+      document.getElementById("menu").style.display = "block";
+    }
+  } else {
+    document.getElementById("zoom-pane").style.display = "block";
+    document.getElementById("controller").style.display = "block";
+  }
+};
+
+var x = window.matchMedia("(max-width: 768px)")
+windowSize(x) // Call listener function at run time
+x.addListener(windowSize)
+
+</script>
+</body>
+</html>
